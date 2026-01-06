@@ -3,151 +3,140 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NetMarket - Portail d'Entreprise</title>
+    <title>NetMarket - Automation & KPIs</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Lato:wght@300;400;700&family=Fira+Code:wght@400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
-        /* --- CONFIGURATION GLOBALE --- */
+        /* --- CONFIGURATION DESIGN --- */
         :root {
-            --primary: #ff6900; /* NetMarket Orange */
-            --primary-dark: #e05e00;
-            --dark: #1a1a1a;
-            --light-bg: #f4f6f8;
+            --primary: #d4af37; /* Or */
+            --primary-dim: #b59020;
+            --black: #0a0a0a;
+            --dark-panel: #141414;
+            --light-grey: #f4f4f4;
             --white: #ffffff;
-            --grey: #666;
-            --border: #e1e4e8;
-            --shadow: 0 4px 6px rgba(0,0,0,0.05);
+            --success: #00c853;
+            --font-title: 'Playfair Display', serif;
+            --font-text: 'Lato', sans-serif;
+            --font-code: 'Fira Code', monospace;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
-        body { background-color: var(--light-bg); color: var(--dark); line-height: 1.6; min-height: 100vh; display: flex; flex-direction: column; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { background-color: var(--light-grey); color: var(--black); font-family: var(--font-text); line-height: 1.6; }
 
-        /* --- HEADER & NAVIGATION --- */
+        /* --- HEADER --- */
         header {
-            background-color: var(--dark);
-            color: var(--white);
-            padding: 0 5%;
-            height: 70px;
+            background-color: var(--black);
+            padding: 1rem 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            border-bottom: 2px solid var(--primary);
         }
-
-        .logo { font-size: 1.5rem; font-weight: bold; letter-spacing: 1px; }
+        .logo { font-family: var(--font-title); font-size: 1.5rem; font-weight: 700; color: var(--white); letter-spacing: 1px; }
         .logo span { color: var(--primary); }
 
-        nav ul { display: flex; list-style: none; gap: 30px; height: 100%; align-items: center; }
+        nav ul { display: flex; list-style: none; gap: 30px; }
         nav a {
-            color: #ccc;
-            text-decoration: none;
-            font-weight: 500;
-            transition: 0.3s;
-            cursor: pointer;
-            height: 70px;
-            display: flex;
-            align-items: center;
-            padding: 0 5px;
-            border-bottom: 3px solid transparent;
+            color: #aaa; text-decoration: none; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 1px; transition: 0.3s; cursor: pointer;
         }
-        nav a:hover, nav a.active { color: var(--white); border-bottom-color: var(--primary); }
-        
-        .login-btn-nav {
-            background-color: var(--primary);
-            color: white !important;
-            height: 40px;
-            padding: 0 20px;
-            border-radius: 5px;
-            border: none;
-        }
-        .login-btn-nav:hover { background-color: var(--primary-dark); border-bottom-color: transparent; }
+        nav a:hover, nav a.active { color: var(--primary); }
 
-        /* --- CONTENU PRINCIPAL (SPA Logic) --- */
-        main { flex: 1; padding: 2rem 5%; max-width: 1400px; margin: 0 auto; width: 100%; }
-        
-        .page-section { display: none; animation: fadeIn 0.4s ease-in-out; }
+        /* --- PAGES MANAGEMENT --- */
+        .page-section { display: none; padding: 2rem 5%; animation: fadeIn 0.5s; }
         .page-section.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        h1.page-title { margin-bottom: 2rem; border-left: 5px solid var(--primary); padding-left: 15px; font-size: 2rem; }
-
-        /* --- ACCUEIL --- */
+        /* --- SECTION 1: WORKFLOWS --- */
         .hero {
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
-            background-size: cover;
-            background-position: center;
-            color: white;
-            padding: 4rem;
-            border-radius: 15px;
-            text-align: center;
-            margin-bottom: 2rem;
+            text-align: center; padding: 4rem 0;
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1500&q=80');
+            background-size: cover; color: white; margin-bottom: 3rem; border-radius: 0 0 20px 20px;
         }
-        .hero h2 { font-size: 2.5rem; margin-bottom: 1rem; }
-        .hero-btn { display: inline-block; background: var(--primary); color: white; padding: 10px 25px; border-radius: 5px; text-decoration: none; margin-top: 1rem; cursor: pointer; transition: 0.3s; }
-        .hero-btn:hover { background: var(--primary-dark); }
+        .hero h1 { font-family: var(--font-title); font-size: 3rem; color: var(--primary); margin-bottom: 1rem; }
 
-        /* --- À PROPOS (Tabs) --- */
-        .tabs { display: flex; gap: 10px; margin-bottom: 2rem; border-bottom: 2px solid #ddd; overflow-x: auto;}
-        .tab-btn {
-            padding: 10px 20px;
-            background: none;
-            border: none;
-            font-size: 1rem;
-            cursor: pointer;
-            color: var(--grey);
-            font-weight: 600;
-            position: relative;
-        }
-        .tab-btn.active { color: var(--primary); }
-        .tab-btn.active::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 100%; height: 2px; background: var(--primary); }
-
-        .about-content { background: var(--white); padding: 2rem; border-radius: 10px; box-shadow: var(--shadow); }
-        .about-block { display: none; }
-        .about-block.active { display: block; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; max-width: 1200px; margin: 0 auto; }
         
-        /* Organigramme visuel simple */
-        .org-chart { display: flex; flex-direction: column; align-items: center; gap: 20px; padding: 20px; }
-        .org-box { background: var(--white); border: 2px solid var(--primary); padding: 15px 30px; border-radius: 8px; font-weight: bold; text-align: center; box-shadow: var(--shadow); width: 250px; }
-        .org-row { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
-        .connector { width: 2px; height: 20px; background: #ccc; }
-
-        /* --- DÉPARTEMENTS (Grid) --- */
-        .dept-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2rem; }
-        .dept-card {
-            background: var(--white);
-            border-radius: 10px;
-            padding: 2rem;
-            box-shadow: var(--shadow);
-            transition: transform 0.3s, box-shadow 0.3s;
-            cursor: pointer;
-            border-top: 4px solid transparent;
+        .card {
+            background: var(--white); border-top: 4px solid var(--black); padding: 2rem; cursor: pointer;
+            transition: 0.3s; box-shadow: 0 5px 15px rgba(0,0,0,0.05); position: relative; overflow: hidden;
         }
-        .dept-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); border-top-color: var(--primary); }
-        .dept-icon { font-size: 2.5rem; color: var(--primary); margin-bottom: 1rem; }
-        .dept-title { font-size: 1.2rem; font-weight: bold; margin-bottom: 0.5rem; }
-        .tool-tag { background: var(--dark); color: white; padding: 4px 10px; border-radius: 20px; font-size: 0.8rem; display: inline-block; margin-top: 10px; }
+        .card:hover { transform: translateY(-10px); border-top-color: var(--primary); box-shadow: 0 15px 30px rgba(0,0,0,0.15); }
+        .card-icon { font-size: 2rem; color: var(--primary); margin-bottom: 1rem; }
+        .card h3 { font-family: var(--font-title); font-size: 1.4rem; margin-bottom: 0.5rem; }
+        .card-tag { background: #eee; padding: 4px 10px; font-size: 0.75rem; text-transform: uppercase; font-weight: bold; }
 
-        /* --- LOGIN --- */
-        .login-container { max-width: 400px; margin: 4rem auto; background: var(--white); padding: 2rem; border-radius: 10px; box-shadow: var(--shadow); text-align: center; }
-        .form-group { margin-bottom: 1.5rem; text-align: left; }
-        .form-group label { display: block; margin-bottom: 0.5rem; color: var(--grey); }
-        .form-group input { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 5px; }
-        .login-submit { width: 100%; background: var(--primary); color: white; padding: 12px; border: none; border-radius: 5px; font-size: 1rem; cursor: pointer; }
+        /* --- SECTION 2: KPIS DASHBOARD --- */
+        .kpi-container { max-width: 1200px; margin: 0 auto; }
+        .kpi-header { margin-bottom: 2rem; border-bottom: 1px solid #ddd; padding-bottom: 1rem; }
+        .kpi-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+        
+        .kpi-card { background: var(--white); padding: 20px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .kpi-title { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+        .kpi-title h3 { font-family: var(--font-title); color: var(--black); }
+        
+        /* Barres de progression KPI */
+        .metric-row { margin-bottom: 15px; }
+        .metric-label { display: flex; justify-content: space-between; font-size: 0.9rem; margin-bottom: 5px; }
+        .progress-bg { width: 100%; height: 8px; background: #eee; border-radius: 4px; overflow: hidden; }
+        .progress-fill { height: 100%; background: var(--primary); width: 0; transition: width 1.5s ease-out; }
+        
+        .big-stat { font-size: 2.5rem; font-weight: bold; color: var(--primary); margin: 10px 0; }
+        .stat-label { color: #666; font-size: 0.9rem; }
 
-        /* --- MODAL --- */
-        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 1000; align-items: center; justify-content: center; }
-        .modal-overlay.active { display: flex; animation: fadeIn 0.3s; }
-        .modal-box { background: var(--white); padding: 2rem; border-radius: 10px; width: 90%; max-width: 600px; position: relative; max-height: 90vh; overflow-y: auto; }
-        .close-modal { position: absolute; top: 15px; right: 20px; font-size: 1.5rem; cursor: pointer; color: #999; }
-        .modal-header { border-bottom: 1px solid #eee; padding-bottom: 1rem; margin-bottom: 1rem; }
-        .modal-header h2 { color: var(--primary); }
+        /* --- MODAL SIMULATION --- */
+        .modal {
+            display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%;
+            background-color: rgba(0,0,0,0.9); align-items: center; justify-content: center;
+        }
+        .modal.active { display: flex; }
+        
+        .modal-content {
+            background-color: var(--dark-panel); color: white; width: 95%; max-width: 1400px; height: 90vh;
+            border-radius: 10px; display: flex; overflow: hidden; box-shadow: 0 0 30px rgba(212, 175, 55, 0.2);
+        }
 
-        /* --- FOOTER --- */
-        footer { background: var(--dark); color: #777; text-align: center; padding: 2rem; margin-top: auto; }
+        /* Gauche : Workflow Image */
+        .modal-left { width: 60%; background: #222; padding: 20px; display: flex; flex-direction: column; border-right: 1px solid #333; }
+        .workflow-img { width: 100%; height: 100%; object-fit: contain; border-radius: 5px; border: 1px solid #444; }
 
+        /* Droite : Console Simulation */
+        .modal-right { width: 40%; background: #0f0f0f; display: flex; flex-direction: column; }
+        .console-header { padding: 15px; border-bottom: 1px solid #333; display: flex; justify-content: space-between; align-items: center; background: #1a1a1a; }
+        .console-title { font-family: var(--font-code); color: var(--primary); font-size: 0.9rem; }
+        
+        .console-body { flex: 1; padding: 20px; font-family: var(--font-code); font-size: 0.85rem; overflow-y: auto; color: #ddd; }
+        .log-entry { margin-bottom: 8px; opacity: 0; animation: fadeInLog 0.3s forwards; display: flex; gap: 10px; }
+        .log-time { color: #666; }
+        .log-msg { color: #fff; }
+        .log-success { color: var(--success); }
+        .log-warning { color: var(--primary); }
+
+        .console-footer { padding: 20px; border-top: 1px solid #333; text-align: center; }
+        .btn-run {
+            background: var(--primary); color: black; border: none; padding: 12px 30px; font-weight: bold;
+            cursor: pointer; text-transform: uppercase; letter-spacing: 1px; font-family: var(--font-text);
+            transition: 0.3s; border-radius: 4px;
+        }
+        .btn-run:hover { background: white; }
+        .btn-run:disabled { background: #444; color: #888; cursor: not-allowed; }
+
+        .close-btn { background: none; border: none; color: white; font-size: 1.5rem; cursor: pointer; }
+
+        @keyframes fadeInLog { to { opacity: 1; } }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .modal-content { flex-direction: column; overflow-y: auto; }
+            .modal-left, .modal-right { width: 100%; height: auto; }
+            .modal-left { height: 400px; }
+            .kpi-grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
@@ -156,327 +145,344 @@
         <div class="logo">Net<span>Market</span></div>
         <nav>
             <ul>
-                <li><a onclick="navigate('home')" class="active" id="nav-home">Accueil</a></li>
-                <li><a onclick="navigate('about')" id="nav-about">À propos de nous</a></li>
-                <li><a onclick="navigate('departments')" id="nav-departments">Départements</a></li>
-                <li><a onclick="navigate('login')" class="login-btn-nav" id="nav-login">Login</a></li>
+                <li><a onclick="showPage('workflows')" class="active" id="nav-workflows">Outils & Flux</a></li>
+                <li><a onclick="showPage('kpis')" id="nav-kpis">Dashboard KPIs</a></li>
             </ul>
         </nav>
     </header>
 
-    <main id="main-content">
+    <section id="workflows" class="page-section active">
+        <div class="hero">
+            <h1>Architecture & Automation</h1>
+            <p>Cliquez sur un outil pour lancer la simulation du workflow n8n.</p>
+        </div>
 
-        <section id="home" class="page-section active">
-            <div class="hero">
-                <h2>Bienvenue sur le portail NetMarket</h2>
-                <p>Leader européen du e-commerce de mode et lifestyle.</p>
-                <br>
-                <button onclick="navigate('departments')" class="hero-btn">Explorer nos solutions</button>
-            </div>
-            
-            <div style="display: flex; gap: 20px; margin-top: 2rem;">
-                <div style="flex:1; background:white; padding:2rem; border-radius:10px; box-shadow:var(--shadow);">
-                    <i class="fas fa-rocket fa-2x" style="color:var(--primary); margin-bottom:1rem;"></i>
-                    <h3>Innovation</h3>
-                    <p>Transformation digitale de tous nos départements pour 2025.</p>
-                </div>
-                <div style="flex:1; background:white; padding:2rem; border-radius:10px; box-shadow:var(--shadow);">
-                    <i class="fas fa-users fa-2x" style="color:var(--primary); margin-bottom:1rem;"></i>
-                    <h3>Collaboration</h3>
-                    <p>18 000 collaborateurs connectés via nos nouveaux outils.</p>
-                </div>
-                <div style="flex:1; background:white; padding:2rem; border-radius:10px; box-shadow:var(--shadow);">
-                    <i class="fas fa-globe-europe fa-2x" style="color:var(--primary); margin-bottom:1rem;"></i>
-                    <h3>Expansion</h3>
-                    <p>Une présence stratégique au cœur de l'Europe.</p>
+        <div class="grid">
+            <div class="card" onclick="openSimulation(0)">
+                <div class="card-icon"><i class="fas fa-pencil-ruler"></i></div>
+                <h3>NetDesignX</h3>
+                <span class="card-tag">Design & Collection</span>
+                <p style="margin-top:15px; color:#666;">Conception 3D, validation des prototypes et sourcing.</p>
+                <div style="margin-top:20px; color:var(--primary); font-size:0.9rem; font-weight:bold;">
+                    <i class="fas fa-play-circle"></i> Simuler le Flux
                 </div>
             </div>
-        </section>
 
-        <section id="about" class="page-section">
-            <h1 class="page-title">À propos de NetMarket</h1>
-            
-            <div class="tabs">
-                <button class="tab-btn active" onclick="openTab(event, 'mission')">Objectif & Mission</button>
-                <button class="tab-btn" onclick="openTab(event, 'general')">Présentation</button>
-                <button class="tab-btn" onclick="openTab(event, 'hierarchy')">Organigramme</button>
-                <button class="tab-btn" onclick="openTab(event, 'values')">Valeurs & RSE</button>
-                <button class="tab-btn" onclick="openTab(event, 'projects')">Projets Futurs</button>
+            <div class="card" onclick="openSimulation(1)">
+                <div class="card-icon"><i class="fas fa-tags"></i></div>
+                <h3>NetCatX</h3>
+                <span class="card-tag">Catalogue / PIM</span>
+                <p style="margin-top:15px; color:#666;">Centralisation PIM et diffusion multicanale (Shopify).</p>
+                <div style="margin-top:20px; color:var(--primary); font-size:0.9rem; font-weight:bold;">
+                    <i class="fas fa-play-circle"></i> Simuler le Flux
+                </div>
             </div>
 
-            <div class="about-content">
-                <div id="mission" class="about-block active">
-                    <h3>Notre Mission</h3>
-                    <p>NetMarket a pour mission de révolutionner l'expérience d'achat en ligne en combinant mode, technologie et durabilité. Nous visons à offrir à nos 50 millions de clients une plateforme fluide, personnalisée et responsable.</p>
+            <div class="card" onclick="openSimulation(2)">
+                <div class="card-icon"><i class="fas fa-bullhorn"></i></div>
+                <h3>NetMarkX</h3>
+                <span class="card-tag">Marketing Mode</span>
+                <p style="margin-top:15px; color:#666;">Automation des campagnes, CRM et Réseaux Sociaux.</p>
+                <div style="margin-top:20px; color:var(--primary); font-size:0.9rem; font-weight:bold;">
+                    <i class="fas fa-play-circle"></i> Simuler le Flux
                 </div>
+            </div>
 
-                <div id="general" class="about-block">
-                    <h3>Présentation Générale</h3>
-                    <ul>
-                        <li><strong>Création :</strong> 2008</li>
-                        <li><strong>Siège :</strong> Yverdon-les-Bains</li>
-                        <li><strong>Chiffre d'Affaires 2024 :</strong> 11.1 Milliards €</li>
-                        <li><strong>Clients Actifs :</strong> 50 Millions</li>
-                        <li><strong>Partenaires :</strong> +3000 Marques</li>
-                    </ul>
+            <div class="card" onclick="openSimulation(3)">
+                <div class="card-icon"><i class="fas fa-headset"></i></div>
+                <h3>NetCareX</h3>
+                <span class="card-tag">Service Client</span>
+                <p style="margin-top:15px; color:#666;">Gestion des tickets, retours et satisfaction client.</p>
+                <div style="margin-top:20px; color:var(--primary); font-size:0.9rem; font-weight:bold;">
+                    <i class="fas fa-play-circle"></i> Simuler le Flux
                 </div>
+            </div>
+        </div>
+    </section>
 
-                <div id="hierarchy" class="about-block">
-                    <h3>Hiérarchie Simplifiée</h3>
-                    <div class="org-chart">
-                        <div class="org-box" style="background-color: var(--dark); color:white; border:none;">CEO / Direction Générale</div>
-                        <div class="connector"></div>
-                        <div class="org-row">
-                            <div class="org-box">Direction Stratégique</div>
-                            <div class="org-box">Direction Opérationnelle</div>
+    <section id="kpis" class="page-section">
+        <div class="kpi-container">
+            <div class="kpi-header">
+                <h2>Tableau de Bord de Performance</h2>
+                <p>Suivi en temps réel des impacts de la transformation digitale.</p>
+            </div>
+
+            <div class="kpi-grid">
+                
+                <div class="kpi-card">
+                    <div class="kpi-title">
+                        <h3><i class="fas fa-pencil-ruler" style="color:var(--primary);"></i> Design & Collection</h3>
+                        <span class="card-tag">NetDesignX</span>
+                    </div>
+                    <div style="display:flex; gap:20px; margin-bottom:20px;">
+                        <div>
+                            <div class="big-stat">-40%</div>
+                            <div class="stat-label">Time-to-Market</div>
                         </div>
-                        <div class="connector"></div>
-                        <div class="org-row">
-                            <div class="org-box" style="font-size:0.9rem;">RH</div>
-                            <div class="org-box" style="font-size:0.9rem;">Finance</div>
-                            <div class="org-box" style="font-size:0.9rem;">IT & Tech</div>
-                            <div class="org-box" style="font-size:0.9rem;">Logistique</div>
-                            <div class="org-box" style="font-size:0.9rem;">Marketing</div>
+                        <div>
+                            <div class="big-stat">12k €</div>
+                            <div class="stat-label">Économie Prototypes</div>
                         </div>
+                    </div>
+                    <div class="metric-row">
+                        <div class="metric-label"><span>Adoption Collection</span> <span>85%</span></div>
+                        <div class="progress-bg"><div class="progress-fill" style="width: 85%;"></div></div>
+                    </div>
+                    <div class="metric-row">
+                        <div class="metric-label"><span>Validation Fournisseur (Délais)</span> <span>92%</span></div>
+                        <div class="progress-bg"><div class="progress-fill" style="width: 92%;"></div></div>
                     </div>
                 </div>
 
-                <div id="values" class="about-block">
-                    <h3>Nos Valeurs & Engagements RSE</h3>
-                    <p><strong>Durabilité :</strong> Objectif neutralité carbone 2030, emballages recyclés, logistique verte.</p>
-                    <p><strong>Inclusion :</strong> Politique stricte de diversité et égalité salariale.</p>
-                    <p><strong>Innovation :</strong> L'IA au service de l'humain et de l'expérience client.</p>
+                <div class="kpi-card">
+                    <div class="kpi-title">
+                        <h3><i class="fas fa-tags" style="color:var(--primary);"></i> Catalogue PIM</h3>
+                        <span class="card-tag">NetCatX</span>
+                    </div>
+                    <div style="display:flex; gap:20px; margin-bottom:20px;">
+                        <div>
+                            <div class="big-stat">0.2%</div>
+                            <div class="stat-label">Taux d'erreur (vs 5%)</div>
+                        </div>
+                        <div>
+                            <div class="big-stat">2h</div>
+                            <div class="stat-label">Mise en ligne (vs 2j)</div>
+                        </div>
+                    </div>
+                    <div class="metric-row">
+                        <div class="metric-label"><span>Complétude Fiches Produits</span> <span>98%</span></div>
+                        <div class="progress-bg"><div class="progress-fill" style="width: 98%;"></div></div>
+                    </div>
+                    <div class="metric-row">
+                        <div class="metric-label"><span>Synchro Stock Temps Réel</span> <span>99.9%</span></div>
+                        <div class="progress-bg"><div class="progress-fill" style="width: 99.9%;"></div></div>
+                    </div>
                 </div>
 
-                <div id="projects" class="about-block">
-                    <h3>Projets Futurs</h3>
-                    <ol style="margin-left: 20px;">
-                        <li>Expansion vers le marché Nord-Américain (USA/Canada).</li>
-                        <li>Automatisation robotique à 100% des nouveaux entrepôts.</li>
-                        <li>Lancement de l'application "Seconde Main" intégrée.</li>
-                    </ol>
+                <div class="kpi-card">
+                    <div class="kpi-title">
+                        <h3><i class="fas fa-bullhorn" style="color:var(--primary);"></i> Marketing</h3>
+                        <span class="card-tag">NetMarkX</span>
+                    </div>
+                    <div style="display:flex; gap:20px; margin-bottom:20px;">
+                        <div>
+                            <div class="big-stat">+25%</div>
+                            <div class="stat-label">Taux Conversion</div>
+                        </div>
+                        <div>
+                            <div class="big-stat">3.5</div>
+                            <div class="stat-label">ROAS (Retour Pub)</div>
+                        </div>
+                    </div>
+                    <div class="metric-row">
+                        <div class="metric-label"><span>Taux Ouverture Email</span> <span>32%</span></div>
+                        <div class="progress-bg"><div class="progress-fill" style="width: 32%;"></div></div>
+                    </div>
+                    <div class="metric-row">
+                        <div class="metric-label"><span>Engagement Réseaux Sociaux</span> <span>High</span></div>
+                        <div class="progress-bg"><div class="progress-fill" style="width: 75%;"></div></div>
+                    </div>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-title">
+                        <h3><i class="fas fa-headset" style="color:var(--primary);"></i> Service Client</h3>
+                        <span class="card-tag">NetCareX</span>
+                    </div>
+                    <div style="display:flex; gap:20px; margin-bottom:20px;">
+                        <div>
+                            <div class="big-stat">4.8/5</div>
+                            <div class="stat-label">CSAT (Satisfaction)</div>
+                        </div>
+                        <div>
+                            <div class="big-stat">60%</div>
+                            <div class="stat-label">Tickets Automatisés</div>
+                        </div>
+                    </div>
+                    <div class="metric-row">
+                        <div class="metric-label"><span>Temps Réponse Moyen ( < 2h)</span> <span>95%</span></div>
+                        <div class="progress-bg"><div class="progress-fill" style="width: 95%;"></div></div>
+                    </div>
+                    <div class="metric-row">
+                        <div class="metric-label"><span>Taux de Retour Produit</span> <span>12%</span></div>
+                        <div class="progress-bg"><div class="progress-fill" style="width: 12%; background: #e74c3c;"></div></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-left">
+                <div style="color:#888; margin-bottom:10px; font-size:0.8rem;">VUE SCHÉMATIQUE (n8n Workflow)</div>
+                <img id="sim-img" src="" alt="Workflow Schema" class="workflow-img">
+            </div>
+
+            <div class="modal-right">
+                <div class="console-header">
+                    <div class="console-title">>_ SYSTEM_CONSOLE : <span id="sim-title" style="color:white;">TOOL</span></div>
+                    <button class="close-btn" onclick="closeModal()">&times;</button>
+                </div>
+                
+                <div class="console-body" id="console-log">
+                    <div style="color:#666; margin-top:50px; text-align:center;">
+                        Prêt à démarrer.<br>Cliquez sur "Lancer la Simulation".
+                    </div>
+                </div>
+
+                <div class="console-footer">
+                    <button id="btn-start" class="btn-run" onclick="runSimulation()">
+                        <i class="fas fa-play"></i> Lancer la Simulation
+                    </button>
                 </div>
             </div>
-        </section>
-
-        <section id="departments" class="page-section">
-            <h1 class="page-title">Nos Départements & Outils</h1>
-            <p style="margin-bottom: 2rem;">Cliquez sur un département pour découvrir sa solution dédiée.</p>
-            
-            <div class="dept-grid" id="dept-grid-container">
-                </div>
-        </section>
-
-        <section id="login" class="page-section">
-            <div class="login-container">
-                <div class="logo" style="margin-bottom: 2rem;">Net<span>Market</span> Portal</div>
-                <div class="form-group">
-                    <label>Identifiant Employé</label>
-                    <input type="text" placeholder="ex: j.dupont@netmarket.com">
-                </div>
-                <div class="form-group">
-                    <label>Mot de passe</label>
-                    <input type="password" placeholder="••••••••">
-                </div>
-                <button class="login-submit" onclick="alert('Connexion simulée réussie ! Bienvenue sur le portail.')">Se connecter</button>
-                <p style="margin-top: 1rem; font-size: 0.8rem; color: #888;">Accès réservé au personnel autorisé.</p>
-            </div>
-        </section>
-
-    </main>
-
-    <footer>
-        <p>© 2025 NetMarket SA - Yverdon-les-Bains. Projet Académique.</p>
-    </footer>
-
-    <div id="modal" class="modal-overlay">
-        <div class="modal-box">
-            <span class="close-modal" onclick="closeModal()">&times;</span>
-            <div class="modal-header">
-                <h2 id="modal-title">Titre Outil</h2>
-                <p id="modal-dept" style="color: #666; margin-top: 5px;">Département</p>
-            </div>
-            <div id="modal-body">
-                </div>
         </div>
     </div>
 
     <script>
-        // --- DONNÉES DES DÉPARTEMENTS ---
-        const departmentsData = [
+        // --- DONNÉES DE SIMULATION ---
+        const tools = [
             {
-                id: "direction",
-                name: "Direction / Stratégie",
-                icon: "fa-chess",
-                tool: "StartVision",
-                desc: "Outil de pilotage stratégique et aide à la décision.",
-                features: "Balanced Scorecard, Power BI, IA Prédictive, Veille concurrentielle."
+                name: "NetDesignX",
+                img: "image_87875e.jpg", // Nom de votre image Design
+                logs: [
+                    "Initializing CLO 3D Integration...",
+                    "Webhook Received: 'Collection_Automne_2025'",
+                    "Fetching 3D Assets from Cloud Storage...",
+                    "[SUCCESS] Assets Loaded (1.2GB)",
+                    "Running Validation Script (Size/Material Check)...",
+                    "Analyzing Trends via WGSN API...",
+                    "[INFO] Color Match: 98% with 'Earth Tones' trend.",
+                    "Creating Sourcing Request in Monday.com...",
+                    "Notify Suppliers: Email Sent via Outlook Node.",
+                    "[SUCCESS] Workflow Completed. Status: 'Ready for Production'."
+                ]
             },
             {
-                id: "rh",
-                name: "Ressources Humaines",
-                icon: "fa-users",
-                tool: "HR SmartSuite",
-                desc: "Gestion complète du cycle de vie collaborateur.",
-                features: "Workable (Recrutement), Rippling (Paie/Admin), Sana Learn (Formation IA)."
+                name: "NetCatX",
+                img: "image_878765.jpg", // Nom de votre image Catalogue
+                logs: [
+                    "Cron Trigger: Hourly Sync Started.",
+                    "Fetching new products from ERP...",
+                    "Processing 150 SKUs...",
+                    "Data Normalization: Converting Sizes EU -> US/UK...",
+                    "[CHECK] Duplicate Detection: 0 Found.",
+                    "Enriching Data via OpenAI (Descriptions generation)...",
+                    "Updating Akeneo PIM...",
+                    "Pushing to Shopify API...",
+                    "[SUCCESS] 150 Products Live on Storefront.",
+                    "Updating Index Algolia..."
+                ]
             },
             {
-                id: "finance",
-                name: "Finance & Comptabilité",
-                icon: "fa-chart-line",
-                tool: "FinOptima",
-                desc: "Automatisation et pilotage financier.",
-                features: "QuickBook, MindBridge (Audit IA), Anaplan (Simulation)."
+                name: "NetMarkX",
+                img: "image_878a0b.jpg", // Nom de votre image Marketing
+                logs: [
+                    "Trigger: New Collection Launch Detected.",
+                    "Fetching Customer Segments from Klaviyo...",
+                    "Segment: 'VIP_High_Spenders' (Count: 45,000)",
+                    "Generating Personalized Email Content...",
+                    "Scheduling Social Posts (Instagram, TikTok) via Hootsuite...",
+                    "Campaign Budget Check: Approved.",
+                    "Sending Broadcast Batch 1...",
+                    "Tracking Pixel Activated.",
+                    "[SUCCESS] Campaign Active. Monitoring ROI."
+                ]
             },
             {
-                id: "achat",
-                name: "Achat & Sourcing",
-                icon: "fa-shopping-cart",
-                tool: "SourceLink",
-                desc: "Optimisation des relations fournisseurs.",
-                features: "Ivalua (SRM), PreWave (Risques), Analyse des coûts."
-            },
-            {
-                id: "design",
-                name: "Design & Collection",
-                icon: "fa-pencil-ruler",
-                tool: "NetDesignX",
-                desc: "Création et prototypage virtuel.",
-                features: "CLO 3D, WGSN (Tendances), Gestion de collection."
-            },
-            {
-                id: "catalogue",
-                name: "Catalogue / E-Merch",
-                icon: "fa-tags",
-                tool: "NetCatX",
-                desc: "Centralisation des données produits (PIM).",
-                features: "Akeneo PIM, Salsify, Synchronisation E-shop."
-            },
-            {
-                id: "marketing",
-                name: "Marketing & Com",
-                icon: "fa-bullhorn",
-                tool: "NetMarkX",
-                desc: "Gestion des campagnes et image de marque.",
-                features: "HubSpot, Google Analytics 4, Hootsuite, IA Générative (Contenu)."
-            },
-            {
-                id: "service",
-                name: "Service Client",
-                icon: "fa-headset",
-                tool: "NetCareX",
-                desc: "CRM et support client omnicanal.",
-                features: "Salesforce Service Cloud, Zendesk, Chatbot IA."
-            },
-            {
-                id: "logistique",
-                name: "Logistique & Supply",
-                icon: "fa-truck-loading",
-                tool: "NetLogX",
-                desc: "Gestion des flux physiques et livraisons.",
-                features: "WMS (Entrepôt), TMS (Transport), Suivi temps réel."
-            },
-            {
-                id: "it",
-                name: "IT / Dev & UX",
-                icon: "fa-laptop-code",
-                tool: "UXTrack360 AI",
-                desc: "Développement et expérience utilisateur.",
-                features: "Jira, Figma, Analyse comportementale IA."
-            },
-            {
-                id: "qualite",
-                name: "Qualité & RSE",
-                icon: "fa-leaf",
-                tool: "TextiGreen AI",
-                desc: "Conformité et développement durable.",
-                features: "QMS, Calculateur Empreinte Carbone, Suivi Certificats."
+                name: "NetCareX",
+                img: "image_878a26.jpg", // Nom de votre image Service Client
+                logs: [
+                    "Webhook: New Ticket Created (Source: Email).",
+                    "Analyzing Sentiment via NLP...",
+                    "[INFO] Sentiment: Negative (Keyword: 'Defect').",
+                    "Classifying Ticket: 'Return / Quality Issue'.",
+                    "Checking Order #88492 in Shopify...",
+                    "Auto-Reply: Generating Return Label...",
+                    "Updating Zendesk Ticket Status -> 'Pending Return'.",
+                    "Notify Quality Team (Slack Alert)...",
+                    "[SUCCESS] Ticket processed automatically."
+                ]
             }
         ];
 
+        let currentToolIndex = 0;
+
         // --- NAVIGATION ---
-        function navigate(pageId) {
-            // Cacher toutes les sections
-            document.querySelectorAll('.page-section').forEach(sec => sec.classList.remove('active'));
-            document.querySelectorAll('nav a').forEach(link => link.classList.remove('active'));
-
-            // Afficher la section demandée
+        function showPage(pageId) {
+            document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+            
             document.getElementById(pageId).classList.add('active');
-            
-            // Mettre à jour le menu (sauf si login)
-            const navLink = document.getElementById('nav-' + pageId);
-            if (navLink) navLink.classList.add('active');
+            document.getElementById('nav-' + pageId).classList.add('active');
         }
 
-        // --- ONGLETS (TABS) À PROPOS ---
-        function openTab(evt, tabName) {
-            // Cacher tous les blocs
-            document.querySelectorAll('.about-block').forEach(block => block.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-
-            // Afficher le bon bloc
-            document.getElementById(tabName).classList.add('active');
-            evt.currentTarget.classList.add('active');
-        }
-
-        // --- GÉNÉRATION GRILLE DÉPARTEMENTS ---
-        function renderDepartments() {
-            const grid = document.getElementById('dept-grid-container');
-            grid.innerHTML = '';
-
-            departmentsData.forEach(dept => {
-                const card = document.createElement('div');
-                card.className = 'dept-card';
-                card.onclick = () => showModal(dept);
-                card.innerHTML = `
-                    <div class="dept-icon"><i class="fas ${dept.icon}"></i></div>
-                    <div class="dept-title">${dept.name}</div>
-                    <div style="font-size:0.9rem; color:#666; margin-bottom:10px;">${dept.desc}</div>
-                    <span class="tool-tag">${dept.tool}</span>
-                `;
-                grid.appendChild(card);
-            });
-        }
-
-        // --- MODAL ---
-        function showModal(dept) {
-            document.getElementById('modal-title').innerText = "Solution : " + dept.tool;
-            document.getElementById('modal-dept').innerText = "Département : " + dept.name;
+        // --- MODAL & SIMULATION ---
+        function openSimulation(index) {
+            currentToolIndex = index;
+            const tool = tools[index];
             
-            document.getElementById('modal-body').innerHTML = `
-                <div style="margin-bottom:15px;">
-                    <h4 style="color:#333; margin-bottom:5px;">Description</h4>
-                    <p>${dept.desc}</p>
-                </div>
-                <div>
-                    <h4 style="color:#333; margin-bottom:5px;">Fonctionnalités & Technologies</h4>
-                    <p style="background:#f4f6f8; padding:10px; border-radius:5px;">${dept.features}</p>
-                </div>
-                <div style="margin-top:20px; text-align:right;">
-                    <button onclick="closeModal()" style="background:var(--primary); color:white; border:none; padding:8px 15px; border-radius:4px; cursor:pointer;">Fermer</button>
-                </div>
-            `;
+            document.getElementById('sim-title').innerText = tool.name;
             
+            // Gestion de l'image (avec fallback si l'image n'existe pas)
+            const imgEl = document.getElementById('sim-img');
+            imgEl.src = tool.img;
+            imgEl.onerror = function() { this.src = 'https://via.placeholder.com/800x600/222/d4af37?text=Image+Workflow+Manquante'; };
+
+            // Reset Console
+            document.getElementById('console-log').innerHTML = '<div style="color:#666; margin-top:50px; text-align:center;">Prêt à démarrer.<br>Cliquez sur "Lancer la Simulation".</div>';
+            document.getElementById('btn-start').disabled = false;
+            document.getElementById('btn-start').innerHTML = '<i class="fas fa-play"></i> Lancer la Simulation';
+
             document.getElementById('modal').classList.add('active');
-            document.body.style.overflow = 'hidden';
         }
 
         function closeModal() {
             document.getElementById('modal').classList.remove('active');
-            document.body.style.overflow = 'auto';
         }
 
-        // Fermer modal si clic dehors
-        window.onclick = function(event) {
-            const modal = document.getElementById('modal');
-            if (event.target == modal) {
-                closeModal();
-            }
+        function runSimulation() {
+            const consoleDiv = document.getElementById('console-log');
+            const btn = document.getElementById('btn-start');
+            const tool = tools[currentToolIndex];
+            
+            consoleDiv.innerHTML = ''; // Clear
+            btn.disabled = true;
+            btn.innerText = "Exécution en cours...";
+
+            let delay = 0;
+            tool.logs.forEach((log, i) => {
+                delay += 800; // 0.8s entre chaque ligne
+                setTimeout(() => {
+                    const div = document.createElement('div');
+                    div.className = 'log-entry';
+                    
+                    const time = new Date().toLocaleTimeString('fr-FR');
+                    let colorClass = 'log-msg';
+                    if(log.includes('[SUCCESS]')) colorClass = 'log-success';
+                    if(log.includes('[INFO]') || log.includes('Trigger')) colorClass = 'log-warning';
+
+                    div.innerHTML = `<span class="log-time">[${time}]</span> <span class="${colorClass}">${log}</span>`;
+                    consoleDiv.appendChild(div);
+                    consoleDiv.scrollTop = consoleDiv.scrollHeight; // Auto scroll
+
+                    // Fin de la simulation
+                    if (i === tool.logs.length - 1) {
+                        setTimeout(() => {
+                            btn.disabled = false;
+                            btn.innerText = "Relancer";
+                        }, 500);
+                    }
+                }, delay);
+            });
         }
 
-        // Initialisation
-        renderDepartments();
+        // Fermeture au clic dehors
+        window.onclick = function(e) {
+            if(e.target == document.getElementById('modal')) closeModal();
+        }
     </script>
-
 </body>
 </html>
